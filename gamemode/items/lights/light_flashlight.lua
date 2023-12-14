@@ -3,7 +3,7 @@ ITEM = class.Create("base_light")
 ITEM.Name 			= "Flashlight"
 ITEM.Description 	= "Lights up dark passages."
 
-ITEM.Model			= Model("models/props/coop_autumn/autumn_flashlight/autumn_flashlight.mdl")
+ITEM.Model			= Model("models/maxofs2d/lamp_flashlight.mdl")
 
 ITEM.Weight 		= 1.5
 

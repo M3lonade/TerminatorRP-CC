@@ -18,7 +18,7 @@ ENT.Whitelist 		= {
 }
 
 function ENT:Initialize()
-	self:SetModel(Model("models/props_survival/crates/crate_ammobox.mdl"))
+	self:SetModel(Model("models/Items/BoxMRounds.mdl"))
 
 	if SERVER then
 		self:PhysicsInit(SOLID_VPHYSICS)

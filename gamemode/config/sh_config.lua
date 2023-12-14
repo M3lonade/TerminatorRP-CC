@@ -4,13 +4,14 @@ GM.SteamGroupURL	= ""
 GM.WebsiteURL		= "http://taconbanana.com"
 
 GM.Developers = {
-	"STEAM_0:0:17901650", -- aesop
+	"STEAM_0:1:91359513", -- M3lon
+	"STEAM_0:0:57650985", -- Lambda
 }
 
 -- Security
-GM.PrivateMode = false
+GM.PrivateMode = true
 
-GM.PrivateSteamIDs = {}
+GM.PrivateSteamIDs = {"STEAM_0:1:91359513", "STEAM_0:0:57650985", "STEAM_0:0:228499983", "STEAM_0:1:159791063"}
 
 GM.TestingClosedMessage = "This server is closed for testing. You are not whitelisted."
 
