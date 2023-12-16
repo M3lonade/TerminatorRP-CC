@@ -1,11 +1,11 @@
 GM.MySQLType 	= "mysqloo"
 
-GM.MySQLHost 	= "gspdb-chi.hosthavoc.com"
+GM.MySQLHost 	= ""
 GM.MySQLPort 	= 3306
-GM.MySQLDB 		= "db164989"
+GM.MySQLDB 		= ""
 
-GM.MySQLUser 	= "db164989"
-GM.MySQLPass 	= "7HJHC8uDFO"
+GM.MySQLUser 	= ""
+GM.MySQLPass 	= ""
 
 GM.MySQLAliases = {
 	chars 			= "cc_chars",
