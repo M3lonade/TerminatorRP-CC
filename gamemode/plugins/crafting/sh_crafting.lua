@@ -10,6 +10,7 @@ function GM:AddCraftingRecipe(tab)
 
 		Entity 				= "cc_workbench",
 		Tool 				= "",
+		Flag 				= "",
 		Visibility 			= CRAFTVIS_ALWAYS,
 
 		Ingredients 		= {},
@@ -70,6 +71,11 @@ function GM:CanSeeRecipe(items, entity, index)
 	if entity:GetClass() != tab.Entity then
 		return false
 	end
+
+	if bit.band(vis, CRAFTVIS_FLAG) == CRAFTVIS_FLAG and not ply:HasCharFlag(tab.flag) then
+        return false
+    end
+
 
 	if bit.band(vis, CRAFTVIS_ALLINGREDIENTS) == CRAFTVIS_ALLINGREDIENTS then
 		for _, v in pairs(tab.Ingredients) do
