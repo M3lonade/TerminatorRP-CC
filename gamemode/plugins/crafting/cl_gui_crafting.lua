@@ -240,7 +240,7 @@ function PANEL:SelectRecipe(row)
 		self.Results:AddLine(name, amount * amt)
 	end
 
-	local craftable, err = GAMEMODE:CanCraftRecipe(self:GetItems(), self:GetEntity(), ply, row.id, amt)
+	local craftable, err = GAMEMODE:CanCraftRecipe(self:GetItems(), self:GetEntity(), LocalPlayer(), row.id, amt)
 
 	if not craftable then
 		self.Craft:SetText(err)
