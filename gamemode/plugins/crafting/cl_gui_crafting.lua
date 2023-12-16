@@ -115,7 +115,7 @@ function PANEL:PopulateCategories()
 
 	local allcount = 0
 	local categories = {}
-	local recipes = GAMEMODE:GetVisibleRecipes(self:GetItems(), self:GetEntity())
+	local recipes = GAMEMODE:GetVisibleRecipes(self:GetItems(), self:GetEntity(), LocalPlayer())
 
 	for _, v in pairs(recipes) do
 		local tab = GAMEMODE.Crafting[v]
@@ -145,7 +145,7 @@ function PANEL:PopulateRecipes(filter)
 	self.Recipes:Clear()
 	self:SelectRecipe()
 
-	local recipes = GAMEMODE:GetVisibleRecipes(self:GetItems(), self:GetEntity())
+	local recipes = GAMEMODE:GetVisibleRecipes(self:GetItems(), self:GetEntity(), LocalPlayer())
 
 	for _, v in pairs(recipes) do
 		local tab = GAMEMODE.Crafting[v]
@@ -240,7 +240,7 @@ function PANEL:SelectRecipe(row)
 		self.Results:AddLine(name, amount * amt)
 	end
 
-	local craftable, err = GAMEMODE:CanCraftRecipe(self:GetItems(), self:GetEntity(), row.id, amt)
+	local craftable, err = GAMEMODE:CanCraftRecipe(self:GetItems(), self:GetEntity(), ply, row.id, amt)
 
 	if not craftable then
 		self.Craft:SetText(err)

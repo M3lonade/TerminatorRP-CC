@@ -23,16 +23,16 @@ net.Receive("nCraft", function(len, ply)
 
 	table.Add(items, ent:GetItems())
 
-	GAMEMODE:Craft(table.Reverse(items), ent, index, amt)
+	GAMEMODE:Craft(table.Reverse(items), ent, ply, index, amt)
 end)
 
-function GM:Craft(items, ent, index, amt)
-	local pos = ent:LocalToWorld(ent:OBBCenter() + Vector(0, 0, 30))
-	local tab = GAMEMODE.Crafting[index]
+function GM:Craft(items, ent, ply, index, amt)
+    local pos = ent:LocalToWorld(ent:OBBCenter() + Vector(0, 0, 30))
+    local tab = GAMEMODE.Crafting[index]
 
-	if amt < 1 then return end
-	if not tab then return end
-	if not GAMEMODE:CanCraftRecipe(items, ent, index, amt) then return end
+    if amt < 1 then return end
+    if not tab then return end
+    if not GAMEMODE:CanCraftRecipe(items, ent, ply, index, amt) then return end
 
 	for i = 1, amt do
 		local ingredients, result = false, false
@@ -133,28 +133,28 @@ net.Receive("nClearRenderModel", function(len, ply)
 end)
 
 net.Receive("nSelectRecipe", function(len, ply)
-	local ent = net.ReadEntity()
-	local index = net.ReadUInt(10)
-	local tab = GAMEMODE.Crafting[index]
+    local ent = net.ReadEntity()
+    local index = net.ReadUInt(10)
+    local tab = GAMEMODE.Crafting[index]
 
-	if not IsValid(ent) then return end
-	if not tab then return end
+    if not IsValid(ent) then return end
+    if not tab then return end
 
-	local items = {}
+    local items = {}
 
-	for _, v in pairs(ply.Inventory) do
-		if class.IsTypeOf(v, "base_equipment") and v:IsWorn() then
-			continue
-		end
+    for _, v in pairs(ply.Inventory) do
+        if class.IsTypeOf(v, "base_equipment") and v:IsWorn() then
+            continue
+        end
 
-		table.insert(items, v)
-	end
+        table.insert(items, v)
+    end
 
-	table.Add(items, ent:GetItems())
+    table.Add(items, ent:GetItems())
 
-	if not GAMEMODE:CanSeeRecipe(table.Reverse(items), ent, index) then return end
+    if not GAMEMODE:CanSeeRecipe(table.Reverse(items), ent, ply, index) then return end
 
-	ent:SetRenderModel(GAMEMODE:GetDefaultItemKey(GAMEMODE:UnpackRecipe(tab.Result[1]), "Model"))
+    ent:SetRenderModel(GAMEMODE:GetDefaultItemKey(GAMEMODE:UnpackRecipe(tab.Result[1]), "Model"))
 end)
 
 util.AddNetworkString("nCraft")

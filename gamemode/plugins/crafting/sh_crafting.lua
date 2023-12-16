@@ -1,6 +1,6 @@
 GM.Crafting = {}
 
--- CanSeeRecipe(self, items, entity) - Return true or false to override default behavior
+-- CanSeeRecipe(self, items, entity, ply) - Return true or false to override default behavior
 -- CanCraftRecipe(self, items, entity, amt) - Return true or false to override default behavior
 -- OnCraft(self, ply) - Return args override default behavior for handling ingredients and results on true
 
@@ -56,7 +56,7 @@ function GM:HasRecipeItem(items, str, amt)
 	return GAMEMODE:HasItem(items, item, amount * amt)
 end
 
-function GM:CanSeeRecipe(items, entity, index)
+function GM:CanSeeRecipe(items, entity, char, index)
 	local tab = GAMEMODE.Crafting[index]
 	local vis = tab.Visibility
 
@@ -72,9 +72,10 @@ function GM:CanSeeRecipe(items, entity, index)
 		return false
 	end
 
-	if bit.band(vis, CRAFTVIS_FLAG) == CRAFTVIS_FLAG and not ply:HasCharFlag(tab.flag) then
-        return false
-    end
+	/**if bit.band(vis, CRAFTVIS_FLAG) == CRAFTVIS_FLAG and not char:HasCharFlag(tab.Flag) then
+		return false
+	end
+	**/
 
 
 	if bit.band(vis, CRAFTVIS_ALLINGREDIENTS) == CRAFTVIS_ALLINGREDIENTS then
@@ -96,11 +97,11 @@ function GM:CanSeeRecipe(items, entity, index)
 	return true
 end
 
-function GM:GetVisibleRecipes(items, entity)
+function GM:GetVisibleRecipes(items, entity, char)
 	local tab = {}
 
 	for k in pairs(GAMEMODE.Crafting) do
-		if self:CanSeeRecipe(items, entity, k) then
+		if self:CanSeeRecipe(items, entity, char, k) then
 			table.insert(tab, k)
 		end
 	end
@@ -108,14 +109,14 @@ function GM:GetVisibleRecipes(items, entity)
 	return tab
 end
 
-function GM:CanCraftRecipe(items, entity, index, amt)
+function GM:CanCraftRecipe(items, entity, char, index, amt)
 	amt = amt or 1
 
 	if amt < 1 then
 		return false, "Invalid amount"
 	end
 
-	if not self:CanSeeRecipe(items, entity, index) then
+	if not self:CanSeeRecipe(items, entity, char, index) then
 		return false, "Invalid recipe"
 	end
 
