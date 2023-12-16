@@ -37,7 +37,7 @@ GAMEMODE:AddCraftingRecipe({
 
 GAMEMODE:AddCraftingRecipe({
 	Category = "Explosives",
-	Visibility = CRAFTVIS_FLAG,
+	Visibility = CRAFTVIS_FLAGTOOL,
 	Tool = "crafting_explosives",
 	Flag = "G",
 	Ingredients = {

@@ -75,6 +75,29 @@ function GM:CanSeeRecipe(items, entity, char, index)
 	if bit.band(vis, CRAFTVIS_FLAG) == CRAFTVIS_FLAG and not char:HasCharFlag(tab.Flag) then
 		return false
 	end
+
+	if bit.band(vis, CRAFTVIS_FIRSTFLAG) == CRAFTVIS_FIRSTFLAG then
+		if not char:HasCharFlag(tab.Flag) then
+		  return false
+		else
+		  if not self:HasRecipeItem(items, tab.Ingredients[1]) then
+			return false
+		  end
+		end
+	  end
+
+	  /**if bit.band(vis, CRAFTVIS_FIRSTFLAG) == CRAFTVIS_FIRSTFLAG then
+		if not char:HasCharFlag(tab.Flag) then
+			return false
+		else
+		  for _, v in pairs(tab.Ingredients) do
+			if not self:HasRecipeItem(items, v) then
+			  return false
+			end
+		   end
+		end
+	  end
+	  **/
 	
 	if bit.band(vis, CRAFTVIS_ALLINGREDIENTS) == CRAFTVIS_ALLINGREDIENTS then
 		for _, v in pairs(tab.Ingredients) do
@@ -121,7 +144,7 @@ function GM:CanCraftRecipe(items, entity, char, index, amt)
 	local tab = GAMEMODE.Crafting[index]
 
 	if tab.CanCraftRecipe != stub then
-		local res, msg = tab:CanCraftRecipe(items, entity, char amt)
+		local res, msg = tab:CanCraftRecipe(items, entity, char, amt)
 
 		if res != nil then
 			return res, msg

@@ -189,6 +189,9 @@ CRAFTVIS_ENTITY 			= 2^3
 CRAFTVIS_TOOLS				= 2^4
 CRAFTVIS_FIRSTINGREDIENT 	= 2^5
 CRAFTVIS_FLAG 	= 2^6
+CRAFTVIS_FLAGTOOL = 2^7
+CRAFTVIS_FIRSTFLAG = 2^8
+
 
 ITEM_NONE 				= 0 -- No location, used for items that were just made
 ITEM_PLAYER 			= 1 -- In a player's inventory
